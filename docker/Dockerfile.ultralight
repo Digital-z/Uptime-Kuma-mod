@@ -1,0 +1,107 @@
+############################################
+# 超轻量级Uptime Kuma Dockerfile
+# 目标：构建体积小于300MB的镜像
+# 注意：此版本不包含Chromium，某些功能可能受限
+############################################
+
+# 第一阶段：构建应用
+FROM node:18-alpine AS builder
+
+WORKDIR /build
+
+# 安装构建依赖
+RUN apk add --no-cache --virtual .build-deps \
+    python3 \
+    make \
+    g++ \
+    git \
+    curl
+
+# 复制package.json和package-lock.json
+COPY package.json package-lock.json ./
+# 如果有.npmrc文件，也复制它
+COPY .npmrc* ./
+
+# 安装所有依赖（包括开发依赖，因为构建过程需要它们）
+RUN npm ci
+
+# 复制源代码
+COPY . .
+
+# 构建前端
+RUN npm run build
+
+# 清理开发依赖，只保留生产依赖
+RUN npm ci --only=production && \
+    npm cache clean --force
+
+# 删除不必要的文件以减小体积
+RUN find . -name "*.map" -type f -delete && \
+    rm -rf .git .github test docs .vscode node_modules/.cache && \
+    find node_modules -type d -name "test" -o -name "tests" | xargs rm -rf && \
+    find node_modules -type d -name ".git" | xargs rm -rf && \
+    find node_modules -type f -name "*.md" -o -name "*.ts" -o -name "LICENSE" | xargs rm -f && \
+    # 删除与Chromium相关的依赖
+    rm -rf node_modules/playwright-core && \
+    # 删除其他可选依赖
+    rm -rf node_modules/mongodb node_modules/mssql node_modules/mysql2 node_modules/pg
+
+############################################
+# 第二阶段：构建健康检查工具
+############################################
+FROM golang:1.19-alpine AS build_healthcheck
+WORKDIR /app
+COPY ./extra/healthcheck.go ./
+RUN go build -o healthcheck ./healthcheck.go
+
+############################################
+# 第三阶段：创建最终镜像
+############################################
+FROM node:18-alpine
+
+WORKDIR /app
+
+# 设置环境变量
+ENV UPTIME_KUMA_IS_CONTAINER=1
+ENV NODE_ENV=production
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1
+
+# 安装最小化的系统依赖 - 绝对最小化
+RUN apk add --no-cache \
+    ca-certificates \
+    tzdata \
+    sqlite \
+    dumb-init
+
+# 从构建阶段复制必要的文件
+COPY --from=builder /build/package.json /build/package-lock.json ./
+COPY --from=builder /build/node_modules ./node_modules
+COPY --from=builder /build/dist ./dist
+COPY --from=builder /build/server ./server
+COPY --from=builder /build/db ./db
+COPY --from=builder /build/extra ./extra
+COPY --from=builder /build/src ./src
+COPY --from=builder /build/config ./config
+
+# 复制健康检查工具并设置执行权限
+COPY --from=build_healthcheck /app/healthcheck ./extra/healthcheck
+RUN chmod +x ./extra/healthcheck
+
+# 创建数据目录并设置权限
+RUN mkdir -p ./data && \
+    chown -R node:node /app
+
+# 切换到非root用户
+USER node
+
+# 暴露端口
+EXPOSE 3001
+
+# 健康检查
+HEALTHCHECK --interval=60s --timeout=30s --start-period=180s --retries=5 CMD /app/extra/healthcheck || exit 1
+
+# 使用dumb-init避免僵尸进程
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
+
+# 设置启动命令
+CMD ["node", "server/server.js"]

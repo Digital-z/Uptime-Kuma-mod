@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  uptime-kuma:
+    image: gfxy/uptime-kuma-mod:v1.0-mod
+    # 使用远程镜像仓库中的镜像
+    container_name: uptime-kuma-mod
+    volumes:
+      - ./data:/app/data
+    ports:
+      - "3001:3001"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - TZ=Asia/Shanghai

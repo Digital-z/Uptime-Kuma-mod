@@ -1,0 +1,129 @@
+/*
+ * 自定义Vue-Multiselect组件样式覆盖
+ * 这个文件用于覆盖Vue-Multiselect组件的默认样式
+ */
+
+/* 隐藏"Press enter to select"文本 */
+.multiselect__option--highlight::after {
+    content: "" !important;
+    display: none !important;
+}
+
+/* 标签弹出框中的多选组件样式优化 */
+.tag-popup-dialog .multiselect {
+    background-color: transparent !important;
+}
+
+.tag-popup-dialog .multiselect__tags {
+    /* 透明背景效果 */
+    background-color: rgba(255, 255, 255, 0.2) !important; /* 更透明的背景 */
+    border: 2px solid rgba(0, 0, 0, 0.2) !important; /* 更明显的边框 */
+    backdrop-filter: blur(5px) !important; /* 减少模糊效果 */
+    transition: all 0.2s ease-in-out !important;
+
+    /* 暗色模式样式 */
+    .dark & {
+        background-color: rgba(30, 37, 46, 0.2) !important; /* 更透明的背景 */
+        border: 2px solid rgba(255, 255, 255, 0.2) !important; /* 暗色模式下更明显的边框 */
+    }
+
+    /* 悬停效果 */
+    &:hover {
+        background-color: rgba(
+            255,
+            255,
+            255,
+            0.3
+        ) !important; /* 悬停时稍微增加不透明度 */
+        border-color: rgba(
+            92,
+            221,
+            139,
+            0.5
+        ) !important; /* 悬停时边框颜色变化 */
+
+        .dark & {
+            background-color: rgba(
+                30,
+                37,
+                46,
+                0.3
+            ) !important; /* 悬停时稍微增加不透明度 */
+            border-color: rgba(
+                92,
+                221,
+                139,
+                0.5
+            ) !important; /* 悬停时边框颜色变化 */
+        }
+    }
+}
+
+.tag-popup-dialog .multiselect__input,
+.tag-popup-dialog .multiselect__single {
+    background-color: transparent !important;
+    color: inherit !important; /* 确保文字颜色与主题一致 */
+}
+
+/* 标签选项样式优化 */
+.tag-popup-dialog .multiselect__option {
+    background-color: transparent !important;
+    border-radius: 6px !important;
+    margin: 2px 4px !important;
+    transition: all 0.2s ease !important;
+
+    /* 悬停效果 */
+    &:hover,
+    &:focus,
+    &.multiselect__option--highlight {
+        background-color: rgba(
+            92,
+            221,
+            139,
+            0.15
+        ) !important; /* 更轻微的高亮效果 */
+        transform: translateY(-1px) !important;
+    }
+
+    /* 暗色模式下的悬停效果 */
+    .dark & {
+        &:hover,
+        &:focus,
+        &.multiselect__option--highlight {
+            background-color: rgba(92, 221, 139, 0.2) !important;
+        }
+    }
+}
+
+.tag-popup-dialog .multiselect__content-wrapper {
+    border: 2px solid rgba(0, 0, 0, 0.2) !important; /* 更明显的边框 */
+    border-top: none !important; /* 顶部不需要边框 */
+    background-color: rgba(255, 255, 255, 0.2) !important; /* 更透明的背景 */
+    backdrop-filter: blur(5px) !important; /* 减少模糊效果 */
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.05) !important; /* 减轻阴影 */
+
+    .dark & {
+        border: 2px solid rgba(255, 255, 255, 0.2) !important; /* 暗色模式下更明显的边框 */
+        border-top: none !important; /* 顶部不需要边框 */
+        background-color: rgba(22, 27, 34, 0.2) !important; /* 更透明的背景 */
+        box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1) !important; /* 减轻阴影 */
+    }
+}
+
+/* 如果需要显示自定义文本，可以取消下面的注释并修改文本内容 */
+/*
+.multiselect__option--highlight::after {
+    content: "按回车键选择" !important;
+    background: var(--bs-primary) !important;
+    color: white !important;
+    border-radius: 4px !important;
+    padding: 4px 8px !important;
+    font-size: 0.9em !important;
+    font-weight: normal !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
+}
+
+.dark .multiselect__option--highlight::after {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) !important;
+}
+*/

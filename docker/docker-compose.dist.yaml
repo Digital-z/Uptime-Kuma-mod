@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  uptime-kuma:
+    image: gfxy/uptime-kuma-mod:v1.0-mod
+    container_name: uptime-kuma-mod
+    volumes:
+      - ./data:/app/data
+    ports:
+      - "3001:3001"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      # 设置时区
+      - TZ=Asia/Shanghai
+      # 禁用内置MariaDB
+      - UPTIME_KUMA_ENABLE_EMBEDDED_MARIADB=0
+    healthcheck:
+      test: ["CMD", "/app/extra/healthcheck"]
+      interval: 60s
+      timeout: 30s
+      retries: 5
+      start_period: 180s
+# 使用说明:
+# 1. 确保已安装 Docker 和 Docker Compose
+# 2. 创建一个新目录并将此文件保存为 docker-compose.yaml
+# 3. 运行 `docker-compose up -d` 启动服务
+# 4. 访问 http://localhost:3001 使用 Uptime Kuma
+#
+# 数据将保存在当前目录的 data 文件夹中
+# 如需备份，只需复制 data 文件夹即可

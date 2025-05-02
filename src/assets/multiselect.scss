@@ -1,0 +1,177 @@
+@import "vars.scss";
+@import "node_modules/vue-multiselect/dist/vue-multiselect";
+
+.multiselect {
+    .dark & {
+        color: $dark-font-color;
+    }
+}
+
+.multiselect__tags {
+    border-radius: 8px !important;
+    border: 2px solid rgba(0, 0, 0, 0.2) !important; /* 更明显的边框 */
+    min-height: 38px;
+    padding: 6px 40px 0 8px;
+    background: rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+
+    /* 暗色模式样式 */
+    .dark & {
+        border: 2px solid rgba(255, 255, 255, 0.2) !important; /* 暗色模式下更明显的边框 */
+    }
+}
+
+.multiselect--active .multiselect__tags {
+    border-radius: 8px 8px 0 0;
+    border-color: rgba(92, 221, 139, 0.5) !important;
+}
+
+.multiselect--above .multiselect__content-wrapper {
+    border: 2px solid rgba(0, 0, 0, 0.2) !important; /* 更明显的边框 */
+    border-bottom: none !important;
+}
+
+.multiselect__option--highlight {
+    background: $primary !important;
+    color: $dark-font-color2 !important;
+}
+
+.multiselect__option--highlight::after {
+    background: $primary !important;
+    color: $dark-font-color2 !important;
+    border-radius: 4px !important;
+    padding: 4px 8px !important;
+    font-size: 0.9em !important;
+    font-weight: normal !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
+    content: "" !important;
+}
+
+.multiselect__tag {
+    border-radius: $border-radius;
+    margin-bottom: 0;
+    padding: 6px 26px 6px 10px;
+    background: rgba(92, 221, 139, 0.8) !important;
+}
+
+.multiselect__placeholder {
+    font-size: 1rem;
+    padding-left: 6px;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    opacity: 0.67;
+}
+
+.multiselect__input,
+.multiselect__single {
+    line-height: 14px;
+    margin-bottom: 0;
+    background-color: transparent !important;
+}
+
+.multiselect__content-wrapper {
+    border-radius: 0 0 8px 8px;
+    /* 使用与主题一致的背景色 */
+    background: $glass-bg-light !important;
+    /* 减少模糊效果，提高性能 */
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    border: 2px solid rgba(0, 0, 0, 0.2) !important; /* 更明显的边框 */
+    border-top: none !important;
+    /* 禁用可能导致闪烁的过渡效果 */
+    transition: none !important;
+    animation: none !important;
+
+    /* 暗色模式样式 */
+    .dark & {
+        border: 2px solid rgba(255, 255, 255, 0.2) !important; /* 暗色模式下更明显的边框 */
+        border-top: none !important;
+    }
+}
+
+/* 下拉选项样式 */
+.multiselect__option {
+    padding: 10px 12px !important;
+    line-height: 1.2;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    background: transparent !important;
+    border-radius: 4px;
+    margin: 0 4px;
+
+    &:hover,
+    &:focus {
+        background: rgba(92, 221, 139, 0.2) !important;
+    }
+}
+
+/* 选项组样式 */
+.multiselect__option-group {
+    margin: 6px 0;
+    padding: 6px 10px;
+    font-weight: 500;
+    font-size: 0.9em;
+    color: rgba(0, 0, 0, 0.6);
+
+    .dark & {
+        color: rgba(255, 255, 255, 0.6);
+    }
+}
+
+.dark {
+    .multiselect__tag {
+        color: $dark-font-color2;
+    }
+
+    .multiselect__tags {
+        background: rgba(13, 17, 23, 0.4) !important;
+        border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .multiselect__input,
+    .multiselect__single {
+        background-color: transparent !important;
+        color: $dark-font-color;
+    }
+
+    .multiselect__content-wrapper {
+        /* 使用与暗色主题一致的背景色 */
+        background: $glass-bg-dark !important;
+        border: 2px solid rgba(255, 255, 255, 0.2) !important; /* 暗色模式下更明显的边框 */
+        border-top: none !important;
+        z-index: 150;
+        /* 禁用可能导致闪烁的过渡效果 */
+        transition: none !important;
+        animation: none !important;
+    }
+
+    .multiselect--above .multiselect__content-wrapper {
+        border: 2px solid rgba(255, 255, 255, 0.2) !important; /* 暗色模式下更明显的边框 */
+        border-bottom: none !important;
+    }
+
+    .multiselect__option--selected {
+        background-color: rgba(13, 17, 23, 0.6) !important;
+    }
+
+    /* 暗色模式下选项悬停/聚焦样式 */
+    .multiselect__option:hover,
+    .multiselect__option:focus {
+        background: rgba(92, 221, 139, 0.3) !important;
+    }
+
+    /* 暗色模式下的选择提示文本样式 */
+    .multiselect__option--highlight::after {
+        background: $primary !important;
+        color: $dark-font-color2 !important;
+        border-radius: 4px !important;
+        padding: 4px 8px !important;
+        font-size: 0.9em !important;
+        font-weight: normal !important;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) !important;
+        content: "" !important;
+    }
+}

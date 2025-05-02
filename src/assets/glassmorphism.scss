@@ -1,0 +1,379 @@
+/* 全局毛玻璃效果样式文件 */
+@import "./vars.scss";
+
+/* 表单输入框毛玻璃效果 */
+.form-control,
+.form-select {
+    background: rgba(255, 255, 255, 0.2) !important; /* 半透明背景 */
+    backdrop-filter: blur(8px) !important; /* 背景模糊效果 */
+    -webkit-backdrop-filter: blur(8px) !important; /* Safari浏览器兼容 */
+    border: 2px solid rgba(0, 0, 0, 0.2) !important; /* 更明显的边框 */
+    color: inherit !important; /* 继承文字颜色 */
+    border-radius: 8px !important; /* 圆角边框 */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+    transition: all 0.3s ease !important;
+
+    /* 暗色模式样式 */
+    .dark & {
+        border: 2px solid rgba(255, 255, 255, 0.2) !important; /* 暗色模式下更明显的边框 */
+    }
+
+    &:focus {
+        background: rgba(255, 255, 255, 0.3) !important;
+        box-shadow: 0 0 0 0.25rem rgba(92, 221, 139, 0.25) !important; /* 聚焦时的阴影效果 */
+        border-color: rgba(92, 221, 139, 0.5) !important;
+    }
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.3) !important;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    /* 暗色模式样式 */
+    .dark & {
+        background: rgba(13, 17, 23, 0.4) !important;
+        border: 2px solid rgba(255, 255, 255, 0.2) !important;
+        color: $dark-font-color !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+
+        &:focus {
+            background: rgba(13, 17, 23, 0.5) !important;
+            box-shadow: 0 0 0 0.25rem rgba(92, 221, 139, 0.25) !important;
+            border-color: rgba(92, 221, 139, 0.5) !important;
+        }
+
+        &:hover {
+            background: rgba(13, 17, 23, 0.5) !important;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25) !important;
+        }
+    }
+}
+
+/* 输入组文本毛玻璃效果 */
+.input-group-text {
+    background: rgba(255, 255, 255, 0.2) !important; /* 半透明背景 */
+    backdrop-filter: blur(8px) !important; /* 背景模糊效果 */
+    -webkit-backdrop-filter: blur(8px) !important; /* Safari浏览器兼容 */
+    border: 2px solid rgba(255, 255, 255, 0.5) !important; /* 半透明边框 */
+    color: inherit !important; /* 继承文字颜色 */
+    border-radius: 8px !important; /* 圆角边框 */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+    transition: all 0.3s ease !important;
+
+    /* 暗色模式样式 */
+    .dark & {
+        background: rgba(13, 17, 23, 0.4) !important;
+        border: 2px solid rgba(255, 255, 255, 0.2) !important;
+        color: $dark-font-color !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+    }
+}
+
+/* 复选框按钮毛玻璃效果 */
+.form-check-input[type="checkbox"] {
+    width: 20px !important;
+    height: 20px !important;
+    background: rgba(
+        255,
+        255,
+        255,
+        0.7
+    ) !important; /* 提高不透明度，增强可见性 */
+    backdrop-filter: blur(5px) !important; /* 背景模糊效果 */
+    -webkit-backdrop-filter: blur(5px) !important; /* Safari浏览器兼容 */
+    border: 2px solid rgba(0, 0, 0, 0.3) !important; /* 加粗边框并增加对比度 */
+    border-radius: 4px !important; /* 圆角边框 */
+    margin-right: 8px !important; /* 与文本间距 */
+    transition: all 0.3s ease !important; /* 平滑过渡 */
+    position: relative !important;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2) !important; /* 添加阴影增强可见性 */
+
+    /* 悬停效果 */
+    &:hover {
+        background: rgba(255, 255, 255, 0.9) !important;
+        box-shadow: 0 0 6px rgba(92, 221, 139, 0.5) !important;
+        border-color: rgba(92, 221, 139, 0.7) !important;
+    }
+
+    /* 选中状态 */
+    &:checked {
+        background-color: rgba(92, 221, 139, 0.9) !important; /* 提高不透明度 */
+        border-color: rgba(0, 0, 0, 0.5) !important; /* 加深边框颜色 */
+        box-shadow: 0 0 5px rgba(92, 221, 139, 0.5) !important; /* 增加发光效果 */
+    }
+
+    /* 选中状态添加勾选标记 */
+    &:checked:after {
+        content: "";
+        position: absolute;
+        left: 6px;
+        top: 2px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+    }
+
+    /* 聚焦状态 */
+    &:focus {
+        border-color: rgba(92, 221, 139, 0.8) !important;
+        box-shadow: 0 0 0 0.25rem rgba(92, 221, 139, 0.4) !important;
+    }
+
+    /* 暗色模式样式 */
+    .dark & {
+        background: rgba(50, 60, 70, 0.8) !important; /* 提高背景对比度 */
+        border: 2px solid rgba(255, 255, 255, 0.5) !important; /* 加粗边框并增加对比度 */
+
+        &:hover {
+            background: rgba(60, 70, 80, 0.9) !important;
+            box-shadow: 0 0 6px rgba(92, 221, 139, 0.4) !important;
+            border-color: rgba(92, 221, 139, 0.6) !important;
+        }
+
+        &:checked {
+            background-color: rgba(92, 221, 139, 0.8) !important;
+            border-color: rgba(255, 255, 255, 0.6) !important;
+            box-shadow: 0 0 5px rgba(92, 221, 139, 0.5) !important;
+        }
+    }
+}
+
+/* 按钮毛玻璃效果 */
+.btn {
+    border-radius: 8px !important;
+
+    &:not(.btn-primary):not(.btn-danger):not(.btn-info):not(.btn-warning) {
+        background: rgba(255, 255, 255, 0.2) !important;
+        backdrop-filter: blur(5px) !important;
+        -webkit-backdrop-filter: blur(5px) !important;
+        border: 2px solid rgba(0, 0, 0, 0.2) !important; /* 更明显的边框 */
+        color: inherit !important;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.3) !important;
+            border-color: rgba(
+                92,
+                221,
+                139,
+                0.5
+            ) !important; /* 悬停时边框颜色变化 */
+        }
+
+        /* 暗色模式样式 */
+        .dark & {
+            background: rgba(13, 17, 23, 0.4) !important;
+            border: 2px solid rgba(255, 255, 255, 0.2) !important; /* 暗色模式下更明显的边框 */
+
+            &:hover {
+                background: rgba(13, 17, 23, 0.6) !important;
+                border-color: rgba(
+                    92,
+                    221,
+                    139,
+                    0.5
+                ) !important; /* 悬停时边框颜色变化 */
+            }
+        }
+    }
+}
+
+/* 半透明主要按钮 */
+.btn-primary {
+    background-color: rgba(92, 221, 139, 0.8) !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    border: none !important;
+}
+
+/* 下拉菜单毛玻璃效果 */
+.dropdown-menu {
+    background: rgba(255, 255, 255, 0.534) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1) !important;
+
+    /* 暗色模式样式 */
+    .dark & {
+        background: rgba(13, 17, 23, 0.8) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .dropdown-item {
+        border-radius: 6px !important;
+        margin: 2px 5px !important;
+        width: calc(100% - 10px) !important;
+    }
+}
+
+/* 表格毛玻璃效果 */
+.table {
+    --bs-table-bg: transparent !important;
+    border-collapse: separate !important;
+    border-spacing: 0 5px !important;
+
+    tr {
+        background: rgba(255, 255, 255, 0.1) !important;
+        backdrop-filter: blur(5px) !important;
+        -webkit-backdrop-filter: blur(5px) !important;
+
+        td {
+            border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+            padding: 12px 15px !important;
+            vertical-align: middle !important;
+
+            &:first-child {
+                border-left: 1px solid rgba(255, 255, 255, 0.1) !important;
+                border-top-left-radius: 8px !important;
+                border-bottom-left-radius: 8px !important;
+            }
+
+            &:last-child {
+                border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+                border-top-right-radius: 8px !important;
+                border-bottom-right-radius: 8px !important;
+            }
+        }
+
+        /* 暗色模式样式 */
+        .dark & {
+            background: rgba(13, 17, 23, 0.3) !important;
+
+            td {
+                border-color: rgba(255, 255, 255, 0.05) !important;
+            }
+        }
+    }
+}
+
+/* 下拉菜单选项毛玻璃效果 */
+select option,
+datalist,
+select optgroup,
+.dropdown-menu,
+.dropdown-item {
+    background: rgba(255, 255, 255, 0.8) !important; /* 半透明背景 */
+    backdrop-filter: blur(10px) !important; /* 背景模糊效果 */
+    -webkit-backdrop-filter: blur(10px) !important; /* Safari浏览器兼容 */
+    color: inherit !important; /* 继承文字颜色 */
+    border-color: rgba(255, 255, 255, 0.3) !important; /* 一致的边框颜色 */
+}
+
+/* 原生select下拉菜单样式增强 */
+/* 使用特定HTML属性选择器强制应用样式 */
+select[size],
+select[multiple] {
+    background: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 8px !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+
+    .dark & {
+        background: rgba(13, 17, 23, 0.8) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+}
+
+/* 特定选项悬停和选中状态 */
+select option:hover,
+select option:focus,
+select option:active,
+select option:checked {
+    background: rgba(92, 221, 139, 0.2) !important;
+    color: inherit !important;
+}
+
+/* 选项组标题样式 */
+select optgroup {
+    font-weight: 600;
+    padding: 5px;
+    font-style: normal;
+
+    .dark & {
+        color: rgba(255, 255, 255, 0.7);
+    }
+}
+
+/* 下拉列表容器样式（适用于非移动设备） */
+@media screen and (min-width: 768px) {
+    /* Chrome和Safari特定样式 */
+    select {
+        -webkit-appearance: none;
+        appearance: none;
+        padding-right: 30px !important; /* 为下拉箭头留出空间 */
+        background-image: url("data:image/svg+xml;utf8,<svg fill='rgba(100, 100, 100, 0.5)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>") !important;
+        background-position: right 5px top 50% !important;
+        background-repeat: no-repeat !important;
+    }
+
+    /* Firefox特定样式 */
+    @-moz-document url-prefix() {
+        select {
+            -moz-appearance: none;
+            text-indent: 0.01px;
+            text-overflow: "";
+            padding-right: 30px !important;
+        }
+    }
+
+    /* Microsoft Edge和IE特定样式 */
+    select::-ms-expand {
+        display: none;
+    }
+}
+
+/* 下拉菜单选项悬停效果 */
+select option:hover,
+select option:focus,
+select option:checked,
+.dropdown-item:hover {
+    background: rgba(92, 221, 139, 0.2) !important; /* 悬停时的背景色 */
+}
+
+/* 暗色模式下拉菜单样式 */
+.dark {
+    select option,
+    select optgroup,
+    datalist,
+    .dropdown-menu,
+    .dropdown-item {
+        background: rgba(13, 17, 23, 0.8) !important; /* 暗色模式下的背景色 */
+        color: $dark-font-color !important; /* 暗色模式文字颜色 */
+        border-color: rgba(255, 255, 255, 0.1) !important; /* 暗色模式边框 */
+    }
+
+    /* 暗色模式下的悬停效果 */
+    select option:hover,
+    select option:focus,
+    select option:checked,
+    .dropdown-item:hover {
+        background: rgba(92, 221, 139, 0.3) !important; /* 暗色模式悬停背景 */
+    }
+
+    /* 暗色模式下的箭头图标 */
+    @media screen and (min-width: 768px) {
+        select {
+            background-image: url("data:image/svg+xml;utf8,<svg fill='rgba(177, 184, 192, 0.7)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>") !important;
+        }
+    }
+}
+
+/* 特别修复模态框中的输入框问题 */
+.modal .form-control {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border: 2px solid rgba(255, 255, 255, 0.5) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+
+    .dark & {
+        background: rgba(13, 17, 23, 0.4) !important;
+        border: 2px solid rgba(255, 255, 255, 0.2) !important;
+    }
+}
+
+/* 导入全局样式到主样式文件 */
